@@ -6,17 +6,13 @@ dotenv.config({
   path: path.join(__dirname, '.env'),
 });
 
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env;
+const LOCAL_URL = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}`;
+
 export default {
-  // type: 'postgres',
-  // host: 'db',
-  // port: parseInt(process.env.POSTGRES_PORT as string, 10) as number,
-  // username: process.env.POSTGRES_USER as string,
-  // password: process.env.POSTGRES_PASSWORD as string,
-  // database: process.env.POSTGRES_DB as string,
   type: 'postgres',
   cache: false,
-  url: process.env.DATABASE_URL as string,
-  // url: 'postgres://npqesdfgcyfqts:e6a39ac1627d764cac34de7d8e76efc681ffcdbc2a21c121f7e0d6bab50fbcfb@ec2-63-32-248-14.eu-west-1.compute.amazonaws.com:5432/d8dr3l1rfiupob',
+  url: process.env.DATABASE_URL as string || LOCAL_URL,
   synchronize: false,
   logging: false,
   ssl: {

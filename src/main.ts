@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { contentParser } from 'fastify-file-interceptor';
 
+import cors from 'cors';
 import { AppModule } from './app.module';
 import { AllExceptionsFilter } from './exceptions/all-exceptions.filter';
 import { LogService } from './logger/logger.service';
@@ -22,6 +23,7 @@ async function _initApp(isFastify: boolean, isLogger: boolean) {
     return app;
   }
   const app = await NestFactory.create(AppModule, { logger: isLogger ? ['verbose'] : false });
+  // app.use(cors({ origin: ['*'] }));
   return app;
 }
 
@@ -50,7 +52,6 @@ async function bootstrap() {
     .setTitle('Kanban service')
     .setDescription('The kanban service API description')
     .setVersion('1.0')
-    // .addServer(`http://localhost:${PORT}`)
     .addBearerAuth(
       {
         in: 'header',
