@@ -12,12 +12,15 @@ const LOCAL_URL = `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_H
 export default {
   type: 'postgres',
   cache: false,
-  url: process.env.DATABASE_URL as string || LOCAL_URL,
+  url: (process.env.DATABASE_URL as string) || LOCAL_URL,
   synchronize: false,
   logging: false,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl:
+    process.env.LOCAL !== '1'
+      ? {
+          rejectUnauthorized: false,
+        }
+      : false,
   entities: ['src/resources/**/**.entity{.ts,.js}'],
   migrations: ['./migrations/*.ts'],
 } as ConnectionOptions;
