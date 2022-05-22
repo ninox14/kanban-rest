@@ -24,7 +24,6 @@ $user: docker-compose up
 
 ## Run Xeroku
 
-
 Run command:
 
 ```bash
@@ -84,6 +83,10 @@ $user: git push heroku source:master
   - `DELETE /tasks/:taskId` - delete task
 
 * `File`:
+
   - `GET file/:taskId/:filename/` - download file
   - `POST file/` - upload file `multipart/form-data`
 
+* `Logs files`:
+  - `GET logs/error` - download 'error' log file
+  - `GET logs/info` - download 'info' log file
