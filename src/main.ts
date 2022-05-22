@@ -22,6 +22,7 @@ async function _initApp(isFastify: boolean, isLogger: boolean) {
     return app;
   }
   const app = await NestFactory.create(AppModule, { logger: isLogger ? ['verbose'] : false });
+  // app.use(cors({ origin: ['*'] }));
   return app;
 }
 
@@ -50,7 +51,6 @@ async function bootstrap() {
     .setTitle('Kanban service')
     .setDescription('The kanban service API description')
     .setVersion('1.0')
-    // .addServer(`http://localhost:${PORT}`)
     .addBearerAuth(
       {
         in: 'header',
