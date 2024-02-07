@@ -16,4 +16,6 @@ COPY package*.json tsconfig.json tsconfig.build.json ./
 
 RUN npm ci
 RUN npm run build
+RUN npm typeorm:migration
+RUN npm run start:dev
 
